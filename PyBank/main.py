@@ -12,12 +12,16 @@ file_to_output = os.path.join("Analysis", "budget_analysis.txt")  # Output file 
 # Define variables to track the financial data
 total_months = 0
 total_net = 0
+
 # Add more variables to track other necessary financial data
 date = []               #open list
-profit_losses = []     #open list
+profit_losses = []     #open list to store changes
 greatest_increase = ["", 0]     #list for date and value
 greatest_decrease = ["", 0]     #list for date and value
-
+greatest_increase = 0
+greatest_decrease = 0
+increase_date = 0
+decrease_date = 0
 
 # Open and read the csv
 with open(records_path) as financial_data:
@@ -28,21 +32,25 @@ with open(records_path) as financial_data:
 
     # Extract first row to avoid appending to net_change_list
     first_row = next(reader)
-    
-
-    # Track the total and net change
    
-    
+    # Track the total and net change
+    total_months +=1 #count the first data row as one month
+    total_net = int(first_row[1]) #start total net with the first profit/loss value
+    previous_profit = int(first_row[1]) #set variable for net change calculation
+      
     # Process each row of data
     for row in reader:
         
         # Track the total
-        total_months = total_months + 1
+        total_months +=1 #to increment the count for each row
+        current_profit = int(row[1])
+        total_net += current_profit
 
         # Track the net change
-        total_net += int(row[1])
-            
-
+        net_change = int(row[1]) - previous_profit
+        profit_losses.append(net_change) #adds the calculated net change to the profit and loss list
+        previous_profit = int(row[1]) #assigns current profit/loss value to previous profit for the next calculation
+    
         # Calculate the greatest increase in profits (month and amount)
         
 
@@ -51,7 +59,7 @@ with open(records_path) as financial_data:
 
 
 # Calculate the average net change across the months
-average_net_change = total_net/total_months
+average_net_change = sum(profit_losses) / len(profit_losses)
 
 # Generate the output summary
 print(f"Financial Analysis")
@@ -63,9 +71,8 @@ print(f"Average Change: ${average_net_change:.2f}")
 # print(f"Greatest Decrease in Profits: {}")
 
 # Print the output
-
+# print(output)
 
 # Write the results to a text file
 # with open(file_to_output, "w") as txt_file:
 #     txt_file.write(output)
-
