@@ -7,7 +7,7 @@ import os
 
 # Files to load and output (update with correct file paths)
 records_path = os.path.join("Resources", "budget_data.csv")  # Input file path
-file_to_output = os.path.join("Analysis", "budget_analysis.txt")  # Output file path
+financial_analysis = os.path.join("Analysis", "financial_analysis.txt")  # Output file path
 
 # Define variables to track the financial data
 total_months = 0 #total months in the data set
@@ -76,5 +76,5 @@ output = (f"Financial Analysis\n"
 print(output)
 
 # Write the results to a text file
-# with open(file_to_output, "w") as txt_file:
-#     txt_file.write(output)
+with open(financial_analysis, "w") as txt_file:
+    txt_file.write(output)
