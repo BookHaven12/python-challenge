@@ -64,16 +64,16 @@ with open(records_path) as financial_data:
 average_net_change = sum(net_change_list) / len(net_change_list)
 
 # Generate the output summary
-print(f"Financial Analysis")
-print("----------------------------")
-print(f"Total Months: {total_months}")
-print(f"Total: ${total_net}")
-print(f"Average Change: ${average_net_change:.2f}")
-print(f"Greatest Increase in Profits: {increase_date} (${greatest_increase})")
-print(f"Greatest Decrease in Profits: {decrease_date} (${greatest_decrease})")
+output = (f"Financial Analysis\n"
+          "----------------------------\n"
+          f"Total Months: {total_months}\n"
+          f"Total: ${total_net}\n"
+          f"Average Change: ${average_net_change:.2f}\n"
+          f"Greatest Increase in Profits: {increase_date} (${greatest_increase})\n"
+          f"Greatest Decrease in Profits: {decrease_date} (${greatest_decrease})")
 
 # Print the output
-# print(output)
+print(output)
 
 # Write the results to a text file
 # with open(file_to_output, "w") as txt_file:
