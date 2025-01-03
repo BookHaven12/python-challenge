@@ -14,14 +14,12 @@ total_months = 0 #total months in the data set
 total_net = 0 #net total amount of "Profit/Losses" over the entire period
 
 # Add more variables to track other necessary financial data
-date = []               #open list
 net_change_list = []     #open list to store changes
-greatest_increase = ["", 0]     #list for date and value
-greatest_decrease = ["", 0]     #list for date and value
-greatest_increase = 0
-greatest_decrease = 0
-increase_date = 0
-decrease_date = 0
+greatest_increase = 0    #variable for greatest increase in profit
+increase_date = ""       #date associated with greatest increase in profit
+greatest_decrease = 0    #variable for greatest decrease in profit
+decrease_date = ""       #date associated with greatest decrease in profit
+
 
 # Open and read the csv
 with open(records_path) as financial_data:
@@ -52,10 +50,14 @@ with open(records_path) as financial_data:
         previous_profit = int(row[1]) #assigns current profit/loss value to previous profit for the next calculation
     
         # Calculate the greatest increase in profits (month and amount)
-        
+        if net_change > greatest_increase:
+           greatest_increase = net_change
+           increase_date = row[0]  #to store the date associated with the greatest increase
 
         # Calculate the greatest decrease in losses (month and amount)
-
+        if net_change < greatest_decrease:
+            greatest_decrease = net_change
+            decrease_date = row[0] #to store the date associated with the greatest decrease
 
 
 # Calculate the average net change across the months
@@ -67,8 +69,8 @@ print("----------------------------")
 print(f"Total Months: {total_months}")
 print(f"Total: ${total_net}")
 print(f"Average Change: ${average_net_change:.2f}")
-# print(f"Greatest Increase in Profits: {}")
-# print(f"Greatest Decrease in Profits: {}")
+print(f"Greatest Increase in Profits: {increase_date} (${greatest_increase})")
+print(f"Greatest Decrease in Profits: {decrease_date} (${greatest_decrease})")
 
 # Print the output
 # print(output)
