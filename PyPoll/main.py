@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-"""PyPoll Homework Starter File."""
+"""PyPoll election results analysis"""
 
 # Import necessary modules
 import csv
@@ -7,7 +7,7 @@ import os
 
 # Files to load and output (update with correct file paths)
 election_csv = os.path.join("Resources", "election_data.csv")       # Input file path
-analysis_path = os.path.join("analysis", "election_analysis.txt")  # Output file path
+analysis_path = os.path.join("analysis", "election_analysis.txt")   # Output file path
 
 # Initialize variables to track the election data
 total_votes = 0                                                     # Track the total number of votes cast
@@ -17,8 +17,8 @@ candidate_list = []                                                 #list for ca
 candidate_votes = {}                                                #dictionary to store votes for each candidate
 
 # Winning Candidate and Winning Count Tracker
-winning_candidate = ""                                               #storing winning names in a list
-winning_count = 0                                                    #storing an integer in a list
+winning_candidate = ""                                               #track the winning name
+winning_count = 0                                                    #track the highest vote count
 
 # Open the CSV file and process it
 with open(election_csv) as election_data:
@@ -64,12 +64,12 @@ with open(analysis_path, "w") as txt_file:
     for candidate_name in candidate_list:
         
         # Get the vote count and calculate the percentage
-        votes = candidate_votes[candidate_name]
+        votes = candidate_votes[candidate_name]                         #retrieves the vote count for that specific candidate
         vote_percentage = (votes/total_votes) * 100
 
         # Update the winning candidate if this one has more votes
         if votes > winning_count:
-            winning_count = votes
+            winning_count = votes 
             winning_candidate = candidate_name
 
         # Print and save each candidate's vote count and percentage
