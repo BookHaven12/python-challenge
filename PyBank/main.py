@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-"""PyBank Homework Starter File."""
+"""PyBank Financial Analysis Script."""
 
 # Dependencies
 import csv
